@@ -1,3 +1,5 @@
+package fundamentos;
+
 public class StringMetodos {
     public static void main(String[] args) {
         String emailDigitado = "  Sergio@Email.COM  ";

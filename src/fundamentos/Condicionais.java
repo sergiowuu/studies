@@ -1,3 +1,5 @@
+package fundamentos;
+
 public class Condicionais {
     public static void main(String[] args) {
         int idade = 21;

@@ -1,3 +1,5 @@
+package fundamentos;
+
 public class Array {
 
     public static String classificarNota(int nota) {

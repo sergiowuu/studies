@@ -1,3 +1,5 @@
+package fundamentos;
+
 public class Escopo {
     public static void main(String[] args) {
 

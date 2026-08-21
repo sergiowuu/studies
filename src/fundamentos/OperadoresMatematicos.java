@@ -1,3 +1,4 @@
+package fundamentos;
 public class OperadoresMatematicos{
     public static void main(String[] args){
         int a = 10;
