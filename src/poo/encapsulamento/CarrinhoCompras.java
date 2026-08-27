@@ -5,8 +5,7 @@ public class CarrinhoCompras {
     private double total;
 
     public CarrinhoCompras() {
-        this.precos = new double[5];
-        this.total = 0;
+        esvaziarCarrinho();
     }
 
     public void adicionarProduto(double preco) {
