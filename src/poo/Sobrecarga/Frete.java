@@ -1,4 +1,4 @@
-package poo.Sobrecarga;
+package poo.sobrecarga;
 
 public class Frete {
     private String origem;
