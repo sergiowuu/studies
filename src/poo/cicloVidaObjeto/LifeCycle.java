@@ -1,6 +1,6 @@
 package poo.cicloVidaObjeto;
 
-public class Main {
+public class LifeCycle {
     public static void main(String[] args) {
         Livro livro1 = new Livro("O Senhor dos Anéis", 1);
         System.out.println(livro1.consultarInformacoes());

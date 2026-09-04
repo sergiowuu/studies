@@ -1,6 +1,6 @@
 package poo.abstracao;
 
-public class Main {
+public class Abstracao {
     public static void main(String[] args){
         Cartao cartao = new Cartao("123", "123456", "Sérgio", 10000.00);
 

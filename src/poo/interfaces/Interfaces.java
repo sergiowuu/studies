@@ -1,6 +1,6 @@
 package poo.interfaces;
 
-public class Main {
+public class Interfaces {
     public static void main(String[] args) {
 
         Reproducao reproduzir = new Video("Me at the zoo", "jawed");

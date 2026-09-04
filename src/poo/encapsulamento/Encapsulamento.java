@@ -1,6 +1,6 @@
 package poo.encapsulamento;
 
-public class Main {
+public class Encapsulamento {
     public static void main(String[] args) {
         CarrinhoCompras carrinho = new CarrinhoCompras();
         carrinho.adicionarProduto(10.0);

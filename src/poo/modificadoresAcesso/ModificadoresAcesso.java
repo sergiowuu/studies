@@ -1,6 +1,6 @@
 package poo.modificadoresAcesso;
 
-public class Main {
+public class ModificadoresAcesso {
     public static void main(String[] args) {
         Visitante visitante1 = new Visitante();
         System.out.println(visitante1.criarVisitante("João", "123.456.789-00"));

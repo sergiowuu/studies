@@ -1,6 +1,6 @@
 package poo.heranca;
 
-public class Main {
+public class Heranca {
     public static void main(String[] args) {
         Funcionario funcionario = new Funcionario("Wilson", "123", 2000.00);
         System.out.println("Salário do funcionário: " + funcionario.calcularSalario());

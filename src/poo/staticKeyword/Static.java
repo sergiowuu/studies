@@ -1,6 +1,6 @@
 package poo.staticKeyword;
 
-public class Main {
+public class Static {
     public static void main(String[] args){
         Pedido pedido1 = new Pedido("Pedido 1");
         Pedido pedido2 = new Pedido("Pedido 2");

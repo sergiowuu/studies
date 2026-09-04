@@ -1,6 +1,6 @@
 package poo.passByValueReference;
 
-public class Main {
+public class PassBy {
     public static void main(String[] args){
         Relatorio relatorio = new Relatorio();
 

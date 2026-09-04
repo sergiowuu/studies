@@ -1,6 +1,6 @@
 package poo.atributosMetodos;
 
-public class Main {
+public class AtributosMetodos {
     public static void main(String[] args) {
         Retangulo retangulo = new Retangulo();
 

@@ -2,7 +2,7 @@ package poo.staticDynamicBinding;
 
 // Código de herança reutilizado para o tópico de Static e Dynamic Binding
 
-public class Main {
+public class StaticDynamic {
     public static void main(String[] args) {
         Funcionario funcionario = new Funcionario("Wilson", "123", 2000.00);
         System.out.println("Salário do funcionário: " + funcionario.calcularSalario());

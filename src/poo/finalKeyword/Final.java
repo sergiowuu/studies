@@ -1,6 +1,6 @@
 package poo.finalKeyword;
 
-public class Main {
+public class Final {
     public static void main(String[] args){
         Bilhete bilhete1 = new Bilhete("Evento 1");
         Bilhete bilhete2 = new Bilhete("Evento 2");

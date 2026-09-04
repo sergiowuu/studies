@@ -1,6 +1,6 @@
 package poo.encadeamentoMetodos;
 
-public class Main {
+public class EncadeamentoMetodos {
     public static void main(String[] args){
         Usuario usuario = new Usuario();
         usuario.setNome("Wilson")

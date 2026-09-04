@@ -1,6 +1,6 @@
 package poo.sobrecarga;
 
-public class Main {
+public class Sobrecarga {
     public static void main(String[] args){
         Frete frete1 = new Frete("Santos", "Sergio", "Mario", false);
 

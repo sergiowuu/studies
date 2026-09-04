@@ -1,6 +1,6 @@
 package poo.classesObjetos;
 
-public class Main {
+public class ClassObject {
     public static void main(String[] args) {
         Livro livro1 = new Livro();
         livro1.titulo = "O Senhor dos Anéis";
