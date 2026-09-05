@@ -13,13 +13,15 @@ public class Aluguel {
     private final Veiculo veiculo;
     private final LocalDate dataInicio;
     private final LocalDate dataFim;
+    private boolean tanqueCheioNaDevolucao;
 
     public Aluguel(Cliente cliente, Veiculo veiculo, LocalDate dataInicio, LocalDate dataFim){
         this.cliente = cliente;
         this.veiculo = veiculo;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
-        veiculo.alugar(); 
+        this.tanqueCheioNaDevolucao = true;
+        veiculo.alugar();
     }
 
     public double calcularValorTotal(){
@@ -27,7 +29,7 @@ public class Aluguel {
         double valorDiaria = veiculo.calcularValorDiaria();
         double valorTotal = diasAluguel * valorDiaria;
 
-        if(!veiculo.isTanqueCheio()){
+        if(!this.tanqueCheioNaDevolucao){ 
             valorTotal += TAXA_TANQUE_VAZIO;
         }
 
@@ -38,6 +40,7 @@ public class Aluguel {
     }
 
     public void devolver(boolean tanqueCheio){
+        this.tanqueCheioNaDevolucao = tanqueCheio; 
         veiculo.setTanqueCheio(tanqueCheio);
         if(!tanqueCheio){
             veiculo.setStatusVeiculo(StatusVeiculo.EM_MANUTENCAO);

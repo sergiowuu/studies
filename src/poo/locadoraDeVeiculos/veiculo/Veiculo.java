@@ -15,7 +15,7 @@ public abstract class Veiculo {
         this.ano = ano;
         this.placa = placa;
         this.tanqueCheio = tanqueCheio;
-        this.statusVeiculo = statusVeiculo;
+        setStatusVeiculo(statusVeiculo);
     }
 
     public String alugar(){
@@ -72,6 +72,9 @@ public abstract class Veiculo {
     }
 
     public void setStatusVeiculo(StatusVeiculo statusVeiculo) {
+        if (statusVeiculo == StatusVeiculo.DISPONIVEL && !this.tanqueCheio) {
+            throw new IllegalArgumentException("O veículo não pode ser definido como DISPONÍVEL se o tanque não estiver cheio.");
+        }
         this.statusVeiculo = statusVeiculo;
     }
 }
