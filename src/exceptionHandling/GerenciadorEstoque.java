@@ -9,10 +9,10 @@ public class GerenciadorEstoque {
         int[] quantidades = new int[5];
         double[] precos = new double[5];
 
-        Scanner scan = new Scanner(System.in);
-
         int opcao = 0;
-        try{
+
+        // Usando try-with-resources, removendo a necessidade de um bloco finally para fechar o Scanner
+        try(Scanner scan = new Scanner(System.in)){
             while (opcao != 5) {
                 System.out.println("=== MENU ===");
                 System.out.println("1. Listar todos os produtos");
@@ -133,8 +133,6 @@ public class GerenciadorEstoque {
                         break;
                 }
             }
-        } finally { // Garante que o scanner seja fechado mesmo que ocorra uma exceção
-            scan.close();
         }
     }
 }
