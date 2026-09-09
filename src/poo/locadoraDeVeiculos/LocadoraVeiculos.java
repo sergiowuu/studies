@@ -29,10 +29,21 @@ public class LocadoraVeiculos {
         Cliente cliente2 = new Cliente("João", "Souza", "22/07/1985", "98765432100", TipoCliente.PREMIUM);
         Cliente cliente3 = new Cliente("Ana", "Costa", "10/12/1995", "45678912300", TipoCliente.COMUM);
 
-        Veiculo veiculo = frota.buscarPorPlaca("ABC1234");
+        // Refatorando para lidar com Optional
+        Veiculo veiculo = frota.buscarPorPlaca("ABC1234")
+            .orElseThrow(() -> new IllegalArgumentException("Veículo não encontrado: ABC1234"));
+
         Aluguel aluguel = new Aluguel(cliente, veiculo, LocalDate.of(2026, 9, 1), LocalDate.of(2026, 9, 5));
-        Aluguel aluguel2 = new Aluguel(cliente2, frota.buscarPorPlaca("XYZ5678"), LocalDate.of(2026, 9, 1), LocalDate.of(2026, 9, 3));
-        Aluguel aluguel3 = new Aluguel(cliente3, frota.buscarPorPlaca("OVO6790"), LocalDate.of(2026, 9, 1), LocalDate.of(2026, 9, 2));
+
+        Veiculo veiculo2 = frota.buscarPorPlaca("XYZ5678")
+            .orElseThrow(() -> new IllegalArgumentException("Veículo não encontrado: XYZ5678"));
+
+        Aluguel aluguel2 = new Aluguel(cliente2, veiculo2, LocalDate.of(2026, 9, 1), LocalDate.of(2026, 9, 3));
+
+        Veiculo veiculo3 = frota.buscarPorPlaca("OVO6790")
+            .orElseThrow(() -> new IllegalArgumentException("Veículo não encontrado: OVO6790"));
+            
+        Aluguel aluguel3 = new Aluguel(cliente3, veiculo3, LocalDate.of(2026, 9, 1), LocalDate.of(2026, 9, 2));
 
         System.out.println("Disponíveis: " + frota.contarDisponiveis());
         System.out.println("Alugados: " + frota.contarAlugados());

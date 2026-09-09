@@ -1,5 +1,7 @@
 package poo.locadoraDeVeiculos.veiculo;
 
+import java.util.Optional;
+
 public class Frota {
     private Veiculo[] veiculos;
     private int quantidade; // Quantidade de veiculos cadastrados
@@ -25,13 +27,14 @@ public class Frota {
         }
     }
 
-    public Veiculo buscarPorPlaca(String placa){
+    // Refatorando para utilizar Optional
+    public Optional<Veiculo> buscarPorPlaca(String placa){
         for (Veiculo v : veiculos){
             if (v != null && v.getPlaca().equals(placa)){
-                return v;
+                return Optional.of(v);
             }
         }
-        return null;
+        return Optional.empty();
     }
 
     public int contarDisponiveis(){
