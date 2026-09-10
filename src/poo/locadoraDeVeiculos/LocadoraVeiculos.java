@@ -3,7 +3,6 @@ package poo.locadoraDeVeiculos;
 import java.time.LocalDate;
 
 import poo.locadoraDeVeiculos.aluguel.Aluguel;
-import poo.locadoraDeVeiculos.aluguel.CalculadoraTaxa;
 import poo.locadoraDeVeiculos.aluguel.TaxaFixa;
 import poo.locadoraDeVeiculos.aluguel.TaxaProporcional;
 import poo.locadoraDeVeiculos.cliente.Cliente;
