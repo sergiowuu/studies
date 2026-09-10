@@ -7,20 +7,21 @@ import poo.locadoraDeVeiculos.veiculo.StatusVeiculo;
 import poo.locadoraDeVeiculos.veiculo.Veiculo;
 
 public class Aluguel {
-    private static final double TAXA_TANQUE_VAZIO = 100;
 
     private final Cliente cliente;
     private final Veiculo veiculo;
     private final LocalDate dataInicio;
     private final LocalDate dataFim;
     private boolean tanqueCheioNaDevolucao;
+    private final CalculadoraTaxa calculadoraTaxa;
 
-    public Aluguel(Cliente cliente, Veiculo veiculo, LocalDate dataInicio, LocalDate dataFim){
+    public Aluguel(Cliente cliente, Veiculo veiculo, LocalDate dataInicio, LocalDate dataFim, CalculadoraTaxa calculadoraTaxa){
         this.cliente = cliente;
         this.veiculo = veiculo;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.tanqueCheioNaDevolucao = true;
+        this.calculadoraTaxa = calculadoraTaxa;
         veiculo.alugar();
     }
 
@@ -30,7 +31,7 @@ public class Aluguel {
         double valorTotal = diasAluguel * valorDiaria;
 
         if(!this.tanqueCheioNaDevolucao){ 
-            valorTotal += TAXA_TANQUE_VAZIO;
+            valorTotal += calculadoraTaxa.calcularTaxa(valorTotal);
         }
 
         double desconto = cliente.getTipoCliente().getDescontoPorcentagem();
