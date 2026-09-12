@@ -1,5 +1,10 @@
 package poo.locadoraDeVeiculos;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDate;
 
 import poo.locadoraDeVeiculos.aluguel.Aluguel;
@@ -78,5 +83,39 @@ public class LocadoraVeiculos {
 
         System.out.println("Valor total do aluguel de " + cliente.getNome() + ": R$" + aluguelTaxaFixa.calcularValorTotal());
         System.out.println("Valor total do aluguel de " + cliente.getNome() + ": R$" + aluguelTaxaPropocional.calcularValorTotal());
+
+        aluguel.salvarRegistro("src/poo/locadoraDeVeiculos/registro.txt");
+        aluguel2.salvarRegistro("src/poo/locadoraDeVeiculos/registro.txt");
+        aluguel3.salvarRegistro("src/poo/locadoraDeVeiculos/registro.txt");
+        aluguelTaxaFixa.salvarRegistro("src/poo/locadoraDeVeiculos/registro.txt");
+        aluguelTaxaPropocional.salvarRegistro("src/poo/locadoraDeVeiculos/registro.txt");
+
+        lerArquivo("src/poo/locadoraDeVeiculos/registro.txt");
+
+        try {
+            Files.delete(Path.of("src/poo/locadoraDeVeiculos/registro.txt"));
+            System.out.println("Arquivo de registro apagado.");
+        } catch (IOException e) {
+            System.out.println("Erro ao apagar o arquivo: " + e.getMessage());
+        }
+    }
+
+    public static void lerArquivo(String caminhoArquivo) {
+        Path caminho = Path.of(caminhoArquivo);
+
+        if(!Files.exists(caminho)){
+            System.out.printf("Arquivo inexistente: %s\n", caminho);
+            return;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(caminhoArquivo))) {
+            String linha;
+
+            while ((linha = reader.readLine()) != null) {
+                System.out.println(linha);
+            }
+        } catch (IOException e) {
+            System.out.printf("Erro na leitura do arquivo: %s", e.getMessage());
+        }
     }
 }

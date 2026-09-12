@@ -1,5 +1,7 @@
 package poo.locadoraDeVeiculos.aluguel;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 
 import poo.locadoraDeVeiculos.cliente.Cliente;
@@ -47,6 +49,25 @@ public class Aluguel {
             veiculo.setStatusVeiculo(StatusVeiculo.EM_MANUTENCAO);
         } else {
             veiculo.setStatusVeiculo(StatusVeiculo.DISPONIVEL);
+        }
+    }
+
+    public void salvarRegistro(String caminhoArquivo){
+        try (FileWriter writer = new FileWriter(caminhoArquivo, true)){
+            String conteudo = String.format(
+                "Nome: %s %s, CPF: %s\nVeículo alugado: %s %s %s %s\nValor total do aluguel: R$ %s\n\n", 
+                this.cliente.getNome(), 
+                this.cliente.getSobrenome(),
+                this.cliente.getCpf(),
+                this.veiculo.getMarca(),
+                this.veiculo.getModelo(),
+                this.veiculo.getAno(),
+                this.veiculo.getPlaca(),
+                calcularValorTotal()
+            );
+            writer.write(conteudo);
+        } catch (IOException e) {
+            System.out.printf("Erro ao escrever no arquivo: %s \n", e.getMessage());
         }
     }
 }
