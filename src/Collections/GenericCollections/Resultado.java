@@ -1,4 +1,4 @@
-package GenericCollections;
+package Collections.GenericCollections;
 
 public class Resultado<T> {
     private T valor;
