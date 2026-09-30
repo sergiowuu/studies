@@ -3,7 +3,6 @@ package exercLogicaProg;
 import java.util.Scanner;
 
 /**
- * Enunciado:
  * Um cofre aceita apenas senhas de 6 dígitos. Dada uma sequência de dígitos, 
  * diga se ela é válida. Para ser válida, ela precisa ter exatamente 6 dígitos, 
  * nenhum deles pode ser repetido em sequência (como "11") e a soma dos dígitos precisa ser par.

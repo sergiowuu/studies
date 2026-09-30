@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Enunciado:
  * Um campeonato tem N times, e cada partida gera um resultado (vitória vale 3 pontos, empate
  * 1, derrota 0). Dada uma lista de resultados de um único time, calcule seus pontos totais, o maior
  * número de vitórias consecutivas e o aproveitamento em porcentagem.
