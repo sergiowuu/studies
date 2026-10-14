@@ -14,32 +14,24 @@ public class CofreSenha {
 
             /**
              * Alterado de String para int, assim a senha pode ter zeros a esquerda,
-             * além disso, a validação
+             * além disso, ao usar int, numeros negativos passavam na validação
              */
-            // BUG: ao guardar a senha como int, os zeros à esquerda se perdem:
-            // "012345" vira 12345 (5 dígitos) e uma senha válida é recusada.
-            // Além disso, números negativos passam: "-12345" tem length 6 em
-            // String.valueOf, e o while (numero > 0) nem executa, então a soma
-            // fica 0 (par) e a senha "-12345" é ACEITA.
-            // A senha é uma sequência de dígitos (texto), não um número.
             String senha;
 
             System.out.print("Digite a senha: ");
 
-            // BUG: nextInt() lê só o primeiro token ("123 456" vira 123) e lança
-            // InputMismatchException para letras, cuja getMessage() é null,
-            // imprimindo "Entrada inválida: null". Lendo a linha inteira como
-            // String, a validação fica toda sob nosso controle.
+            /**
+             * Com nextInt, a entrada "123 456" virava 123. Também era lançado
+             * InputMismatchException para letras, cujo getMessage() é null.
+             */
             senha = scan.nextLine().trim();
-            // try {
-            //     senha = scan.nextInt();
 
-            // BUG: com String é preciso garantir que todos os caracteres são
-            // dígitos, não só o tamanho. "\\d{6}" = exatamente 6 dígitos (0-9).
-            // MELHORIA: usar exceções para controle de fluxo (throw só para cair
-            // no catch logo abaixo) é desnecessário; basta imprimir a mensagem.
-            // O catch (Exception e) genérico também misturava erros de validação
-            // com erros de leitura sob o mesmo rótulo "Entrada inválida".
+            /**
+             * Para garantir que todos os caracteres são dígitos e não apenas o tamanho,
+             * foi usado uma regex que verifica se a senha contém exatamente 6 dígitos (0-9).
+             * Também foi removido as exceções para controle de fluxo, sendo trocadas por um 
+             * println, que é mais simples e direto.
+             */
             if (!senha.matches("\\d{6}")) {
                 System.out.println("Senha inválida: a senha deve conter exatamente 6 dígitos numéricos.");
             } else if (temDigitosIguais(senha)) {
@@ -49,37 +41,13 @@ public class CofreSenha {
             } else {
                 System.out.println("Senha aceita.");
             }
-            //     if (String.valueOf(senha).length() != 6) {
-            //         throw new IllegalArgumentException("A senha deve conter 6 dígitos.");
-            //     } else if (temDigitosIguais(senha)) {
-            //         throw new IllegalArgumentException("A senha não deve conter números iguais sequenciais.");
-            //     } else {
-            //         // MELHORIA: o cálculo da soma foi extraído para o método
-            //         // somaDigitos, assim como já foi feito com temDigitosIguais.
-            //         int somaDigitos = 0;
-            //         int numero = senha;
-            //
-            //         while (numero > 0) {
-            //             somaDigitos += numero % 10;
-            //             numero /= 10;
-            //         }
-            //
-            //         if (somaDigitos % 2 != 0) {
-            //             throw new IllegalArgumentException("A soma dos dígitos da senha deve ser par.");
-            //         }
-            //
-            //         System.out.println("Senha aceita.");
-            //     }
-            // } catch (Exception e) {
-            //     System.out.println("Entrada inválida: " + e.getMessage());
-            // } finally{
-            //     scan.close();
-            // }
         }
     }
 
-    // MELHORIA: recebe a String diretamente, sem converter de int de novo
-    // (a conversão também perdia zeros à esquerda).
+    /**
+     * Como senha agora é String, recebe uma String direto, sem precisar
+     * ficar convertendo de int para String
+     */
     static boolean temDigitosIguais(String senha) {
         for (int i = 0; i < senha.length() - 1; i++) {
             if (senha.charAt(i) == senha.charAt(i + 1)) {
@@ -88,18 +56,11 @@ public class CofreSenha {
         }
         return false;
     }
-    // static boolean temDigitosIguais(int senha) {
-    //     String senhaString = String.valueOf(senha);
-    //     for (int i = 0; i < senhaString.length() - 1; i++) {
-    //         if (senhaString.charAt(i) == senhaString.charAt(i + 1)) {
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // }
 
-    // Como a senha agora é String, cada char é convertido em seu valor numérico:
-    // c - '0' transforma '7' (código 55) em 7 (55 - 48).
+    /**
+     * Antes, a soma dos dígitos era feita no while dentro da validação,
+     * agora foi separado para um método que recebe a senha e retorna a soma
+     */
     static int somaDigitos(String senha) {
         int soma = 0;
         for (int i = 0; i < senha.length(); i++) {
