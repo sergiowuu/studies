@@ -13,9 +13,16 @@ import java.util.Map;
  * acima da média anual.
  */
 public class ConsumoAgua {
-    private static final double TARIFA_BASE = 10; // 0 a 10
-    private static final double TARIFA_MEDIANA = TARIFA_BASE * 1.2; // 11 a 20
-    private static final double TARIFA_CARA = TARIFA_BASE * 1.5; // > 20
+    private static final int MESES_NO_ANO = 12;
+    private static final int CONSUMO_MIN = 5;
+    private static final int CONSUMO_MAX = 30;
+
+    private static final int LIMITE_FAIXA_1 = 10; // m³
+    private static final int LIMITE_FAIXA_2 = 20; // m³
+
+    private static final double TARIFA_BASE = 10; // 0 a LIMITE_FAIXA_1
+    private static final double TARIFA_MEDIANA = TARIFA_BASE * 1.2; // LIMITE_FAIXA_1 a LIMITE_FAIXA_2
+    private static final double TARIFA_CARA = TARIFA_BASE * 1.5; // > LIMITE_FAIXA_2
 
     public static void main(String[] args) {
 
@@ -24,20 +31,17 @@ public class ConsumoAgua {
 
         double valorAnual = 0;
         String mesMaiorValor = "";
-        double maiorValor = 0;
+        double maiorValor = Double.NEGATIVE_INFINITY;
 
-        for (int i = 1; i <= 12; i++) {
-            int min = 5;
-            int max = 30;
-
-            double consumo = Math.round((min + (max - min) * Math.random()) * 100.0) / 100.0; // Duas casas decimais
+        for (int i = 1; i <= MESES_NO_ANO; i++) {
+            double consumo = CONSUMO_MIN + (CONSUMO_MAX - CONSUMO_MIN) * Math.random();
 
             leituras.put("Mes " + i, consumo);
         }
 
         for (Map.Entry<String, Double> leitura : leituras.entrySet()) {
             String mes = leitura.getKey();
-            Double consumo = leitura.getValue();
+            double consumo = leitura.getValue();
 
             double valorMensal = calcularValorMes(consumo);
 
@@ -51,10 +55,10 @@ public class ConsumoAgua {
             }
         }
 
-        double mediaAnual = valorAnual / 12;
+        double mediaAnual = valorAnual / leituras.size();
         int mesesAcimaMedia = 0;
 
-        for (Double valor : valorPorMes.values()) {
+        for (double valor : valorPorMes.values()) {
             if (valor > mediaAnual) {
                 mesesAcimaMedia++;
             }
@@ -62,24 +66,23 @@ public class ConsumoAgua {
 
         System.out.println("---------- Resultados ----------");
 
-        System.out.println("Valor anual: " + Math.round(valorAnual * 100.0) / 100.0);
-        System.out.println("Mes de maior valor: " + mesMaiorValor + " -> " + maiorValor);
-        System.out.println("Média anual: " + mediaAnual);
-        System.out.println("Meses acima da média anual: " + mesesAcimaMedia);
+        System.out.printf("Valor anual: %.2f%n", valorAnual);
+        System.out.printf("Mes de maior valor: %s -> %.2f%n", mesMaiorValor, maiorValor);
+        System.out.printf("Media anual: %.2f%n", mediaAnual);
+        System.out.printf("Meses acima da media anual: %d%n", mesesAcimaMedia);
     }
 
     static double calcularValorMes(double consumo) {
-        double valorMensal = 0;
-
-        if (consumo <= 10) {
-            valorMensal = TARIFA_BASE;
-        } else if (consumo <= 20) {
-            valorMensal = Math.round((TARIFA_BASE + (consumo - 10) * TARIFA_MEDIANA) * 100.0) / 100.0;
-        } else {
-            valorMensal = Math.round((TARIFA_BASE + 10 * TARIFA_MEDIANA + (consumo - 20) * TARIFA_CARA) * 100.0)
-                    / 100.0;
+        if (consumo <= LIMITE_FAIXA_1) {
+            return TARIFA_BASE;
         }
 
-        return valorMensal;
+        if (consumo <= LIMITE_FAIXA_2) {
+            return TARIFA_BASE + (consumo - LIMITE_FAIXA_1) * TARIFA_MEDIANA;
+        }
+
+        return TARIFA_BASE
+                + (LIMITE_FAIXA_2 - LIMITE_FAIXA_1) * TARIFA_MEDIANA
+                + (consumo - LIMITE_FAIXA_2) * TARIFA_CARA;
     }
 }
