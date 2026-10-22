@@ -1,4 +1,4 @@
-package Collections.Stacks;
+package collections.stacks;
 
 public class Main {
     public static void main(String[] args) {

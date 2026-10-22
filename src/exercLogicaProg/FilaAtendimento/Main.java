@@ -1,4 +1,4 @@
-package exercLogicaProg.FilaAtendimento;
+package exerclogicaprog.filaatendimento;
 
 import java.util.List;
 

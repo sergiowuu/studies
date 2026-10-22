@@ -1,4 +1,4 @@
-package poo.cicloVidaObjeto;
+package poo.ciclovidaobjeto;
 
 public class Livro {
     private String titulo;

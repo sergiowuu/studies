@@ -1,4 +1,4 @@
-package poo.finalKeyword;
+package poo.finalkeyword;
 
 public class Final {
     public static void main(String[] args){

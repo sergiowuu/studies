@@ -1,4 +1,4 @@
-package poo.classesObjetos;
+package poo.classesobjetos;
 
 public class ClassObject {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package poo.finalKeyword;
+package poo.finalkeyword;
 
 public class Bilhete {
     private static int totalBilhetes = 0;

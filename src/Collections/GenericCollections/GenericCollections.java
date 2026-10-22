@@ -1,4 +1,4 @@
-package Collections.GenericCollections;
+package collections.genericcollections;
 
 public class GenericCollections {
     public static void main(String[] args) {

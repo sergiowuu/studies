@@ -1,4 +1,4 @@
-package poo.classesObjetos;
+package poo.classesobjetos;
 
 public class Livro {
     String titulo;

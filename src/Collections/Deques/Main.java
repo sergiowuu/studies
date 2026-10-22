@@ -1,4 +1,4 @@
-package Collections.Deques;
+package collections.deques;
 
 public class Main {
     public static void main(String[] args) {

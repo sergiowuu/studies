@@ -1,4 +1,4 @@
-package poo.atributosMetodos;
+package poo.atributosmetodos;
 
 public class Retangulo {
     double largura;

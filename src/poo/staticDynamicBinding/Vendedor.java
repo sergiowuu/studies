@@ -1,4 +1,4 @@
-package poo.staticDynamicBinding;
+package poo.staticdynamicbinding;
 
 public class Vendedor extends Funcionario {
     private double comissao;

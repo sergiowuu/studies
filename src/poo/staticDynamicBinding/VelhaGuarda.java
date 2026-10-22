@@ -1,4 +1,4 @@
-package poo.staticDynamicBinding;
+package poo.staticdynamicbinding;
 
 public class VelhaGuarda extends Funcionario {
     static final double BONUS = 500.00;

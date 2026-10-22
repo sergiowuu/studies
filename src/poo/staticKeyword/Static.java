@@ -1,4 +1,4 @@
-package poo.staticKeyword;
+package poo.statickeyword;
 
 public class Static {
     public static void main(String[] args){

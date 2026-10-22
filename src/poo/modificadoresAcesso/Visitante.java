@@ -1,4 +1,4 @@
-package poo.modificadoresAcesso;
+package poo.modificadoresacesso;
 
 public class Visitante {
     private String nome;

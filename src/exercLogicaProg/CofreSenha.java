@@ -1,4 +1,4 @@
-package exercLogicaProg;
+package exerclogicaprog;
 
 import java.util.Scanner;
 

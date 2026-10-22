@@ -1,4 +1,4 @@
-package poo.passByValueReference;
+package poo.passbyvaluereference;
 
 public class Relatorio {
     private String nome;

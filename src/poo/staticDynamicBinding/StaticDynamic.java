@@ -1,4 +1,4 @@
-package poo.staticDynamicBinding;
+package poo.staticdynamicbinding;
 
 // Código de herança reutilizado para o tópico de Static e Dynamic Binding
 

@@ -1,4 +1,4 @@
-package exercLogicaProg.FilaAtendimento;
+package exerclogicaprog.filaatendimento;
 
 public class Cliente {
     private String nome;

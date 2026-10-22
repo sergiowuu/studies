@@ -1,4 +1,4 @@
-package poo.staticKeyword;
+package poo.statickeyword;
 
 public class Pedido {
     private static int totalPedidos = 0;

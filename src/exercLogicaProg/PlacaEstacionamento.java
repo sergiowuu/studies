@@ -1,4 +1,4 @@
-package exercLogicaProg;
+package exerclogicaprog;
 
 /**
  * Um estacionamento só aceita placas em uma formato específico: 3 letras

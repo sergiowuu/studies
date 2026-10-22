@@ -1,4 +1,4 @@
-package poo.staticDynamicBinding;
+package poo.staticdynamicbinding;
 
 public class Operador extends Funcionario{
     public Operador(String nome, String identificador, double salario) {

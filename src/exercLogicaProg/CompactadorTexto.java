@@ -1,4 +1,4 @@
-package exercLogicaProg;
+package exerclogicaprog;
 
 /**
  * Dado uma String, deve ser comprimido a sequência de caracteres iguais consecutivos

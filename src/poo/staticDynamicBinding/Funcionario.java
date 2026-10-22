@@ -1,4 +1,4 @@
-package poo.staticDynamicBinding;
+package poo.staticdynamicbinding;
 
 public class Funcionario {
     protected String nome;

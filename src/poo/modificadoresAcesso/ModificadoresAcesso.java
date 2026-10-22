@@ -1,4 +1,4 @@
-package poo.modificadoresAcesso;
+package poo.modificadoresacesso;
 
 public class ModificadoresAcesso {
     public static void main(String[] args) {

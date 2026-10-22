@@ -1,0 +1,121 @@
+package poo.locadoraveiculos;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.LocalDate;
+
+import poo.locadoraveiculos.aluguel.Aluguel;
+import poo.locadoraveiculos.aluguel.TaxaFixa;
+import poo.locadoraveiculos.aluguel.TaxaProporcional;
+import poo.locadoraveiculos.cliente.Cliente;
+import poo.locadoraveiculos.cliente.TipoCliente;
+import poo.locadoraveiculos.veiculo.Frota;
+import poo.locadoraveiculos.veiculo.Moto;
+import poo.locadoraveiculos.veiculo.Sedan;
+import poo.locadoraveiculos.veiculo.StatusVeiculo;
+import poo.locadoraveiculos.veiculo.Suv;
+import poo.locadoraveiculos.veiculo.Van;
+import poo.locadoraveiculos.veiculo.Veiculo;
+
+public class LocadoraVeiculos {
+    public static void main(String[] args) {
+        Frota frota = new Frota(10);
+        frota.adicionarVeiculo(new Sedan("Toyota", "Corolla", "2022", "ABC1234", true, StatusVeiculo.DISPONIVEL));
+        frota.adicionarVeiculo(new Sedan("Toyota", "Corolla", "2022", "ABC1235", true, StatusVeiculo.DISPONIVEL));
+        frota.adicionarVeiculo(new Suv("Jeep", "Compass", "2023", "XYZ5678", true, StatusVeiculo.DISPONIVEL));
+        frota.adicionarVeiculo(new Van("Fiat", "Ducato", "2020", "QAW0987", false, StatusVeiculo.EM_MANUTENCAO));
+        frota.adicionarVeiculo(new Moto("Honda", "CB 300F Twister", "2024", "OVO6790", true, StatusVeiculo.DISPONIVEL));
+
+        System.out.println("Disponíveis: " + frota.contarDisponiveis());
+        System.out.println("Alugados: " + frota.contarAlugados());
+        System.out.println("Em manutenção: " + frota.contarEmManutencao());
+
+        Cliente cliente = new Cliente("Maria", "Silva", "15/03/1990", "12345678900", TipoCliente.FIDELIDADE);
+        Cliente cliente2 = new Cliente("João", "Souza", "22/07/1985", "98765432100", TipoCliente.PREMIUM);
+        Cliente cliente3 = new Cliente("Ana", "Costa", "10/12/1995", "45678912300", TipoCliente.COMUM);
+
+        TaxaFixa taxaFixa = new TaxaFixa(100);
+        TaxaProporcional taxaProporcional = new TaxaProporcional(0.2);
+
+        // Refatorando para lidar com Optional
+        Veiculo veiculo = frota.buscarPorPlaca("ABC1234")
+            .orElseThrow(() -> new IllegalArgumentException("Veículo não encontrado: ABC1234"));
+
+        Aluguel aluguel = new Aluguel(cliente, veiculo, LocalDate.of(2026, 9, 1), LocalDate.of(2026, 9, 5), taxaFixa);
+
+        Veiculo veiculo2 = frota.buscarPorPlaca("XYZ5678")
+            .orElseThrow(() -> new IllegalArgumentException("Veículo não encontrado: XYZ5678"));
+
+        Aluguel aluguel2 = new Aluguel(cliente2, veiculo2, LocalDate.of(2026, 9, 1), LocalDate.of(2026, 9, 3), taxaProporcional);
+
+        Veiculo veiculo3 = frota.buscarPorPlaca("OVO6790")
+            .orElseThrow(() -> new IllegalArgumentException("Veículo não encontrado: OVO6790"));
+            
+        Aluguel aluguel3 = new Aluguel(cliente3, veiculo3, LocalDate.of(2026, 9, 1), LocalDate.of(2026, 9, 2), taxaFixa);
+
+        Veiculo veiculo4 = frota.buscarPorPlaca("ABC1235")
+            .orElseThrow(() -> new IllegalArgumentException("Veículo não encontrado: ABC1235"));
+
+        System.out.println("Disponíveis: " + frota.contarDisponiveis());
+        System.out.println("Alugados: " + frota.contarAlugados());
+        System.out.println("Em manutenção: " + frota.contarEmManutencao());
+
+        aluguel.devolver(true);
+        System.out.println("Valor total do aluguel de " + cliente.getNome() + ": R$" + aluguel.calcularValorTotal());
+        aluguel2.devolver(false);
+        System.out.println("Valor total do aluguel de " + cliente.getNome() + ": R$" + aluguel2.calcularValorTotal());
+        aluguel3.devolver(false);
+        System.out.println("Valor total do aluguel de " + cliente.getNome() + ": R$" + aluguel3.calcularValorTotal());
+
+        System.out.println("Disponíveis: " + frota.contarDisponiveis());
+        System.out.println("Alugados: " + frota.contarAlugados());
+        System.out.println("Em manutenção: " + frota.contarEmManutencao());
+
+
+        Aluguel aluguelTaxaFixa = new Aluguel(cliente, veiculo, LocalDate.of(2026, 9, 10), LocalDate.of(2026, 9, 13), taxaFixa);
+        Aluguel aluguelTaxaPropocional = new Aluguel(cliente, veiculo4, LocalDate.of(2026, 9, 10), LocalDate.of(2026, 9, 13), taxaProporcional);
+
+        aluguelTaxaFixa.devolver(false);
+        aluguelTaxaPropocional.devolver(false);
+
+        System.out.println("Valor total do aluguel de " + cliente.getNome() + ": R$" + aluguelTaxaFixa.calcularValorTotal());
+        System.out.println("Valor total do aluguel de " + cliente.getNome() + ": R$" + aluguelTaxaPropocional.calcularValorTotal());
+
+        aluguel.salvarRegistro("src/poo/locadoraDeVeiculos/registro.txt");
+        aluguel2.salvarRegistro("src/poo/locadoraDeVeiculos/registro.txt");
+        aluguel3.salvarRegistro("src/poo/locadoraDeVeiculos/registro.txt");
+        aluguelTaxaFixa.salvarRegistro("src/poo/locadoraDeVeiculos/registro.txt");
+        aluguelTaxaPropocional.salvarRegistro("src/poo/locadoraDeVeiculos/registro.txt");
+
+        lerArquivo("src/poo/locadoraDeVeiculos/registro.txt");
+
+        try {
+            Files.delete(Path.of("src/poo/locadoraDeVeiculos/registro.txt"));
+            System.out.println("Arquivo de registro apagado.");
+        } catch (IOException e) {
+            System.out.println("Erro ao apagar o arquivo: " + e.getMessage());
+        }
+    }
+
+    public static void lerArquivo(String caminhoArquivo) {
+        Path caminho = Path.of(caminhoArquivo);
+
+        if(!Files.exists(caminho)){
+            System.out.printf("Arquivo inexistente: %s\n", caminho);
+            return;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(caminhoArquivo))) {
+            String linha;
+
+            while ((linha = reader.readLine()) != null) {
+                System.out.println(linha);
+            }
+        } catch (IOException e) {
+            System.out.printf("Erro na leitura do arquivo: %s", e.getMessage());
+        }
+    }
+}

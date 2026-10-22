@@ -1,4 +1,4 @@
-package poo.passByValueReference;
+package poo.passbyvaluereference;
 
 public class PassBy {
     public static void main(String[] args){

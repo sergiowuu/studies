@@ -1,4 +1,4 @@
-package Collections.Queues;
+package collections.queues;
 
 public class Main {
     public static void main(String[] args) {
